@@ -4,7 +4,7 @@ date: 2016-08-16 13:59:52
 tags:
 ---
 
-Javascript uses prototype chains to implement prototypical inheritance, and most Javascript examples that implement (pseudo)classical inheritance assign a class' prototype using Object.create(Super.prototype). 
+Javascript uses prototype chains to implement prototypical inheritance, and most Javascript examples that implement (pseudo)classical inheritance assign a class' prototype using *Object.create(Super.prototype)*. 
 
 If you run the following in the console:
 ~~~~
@@ -32,7 +32,7 @@ b.__proto__ === SubClass.prototype; //returns true
 Nearly everything in Javascript has a \_\_proto\_\_ property that allows you to access the prototype of its constructor.
 <br>
 
-A quick Google search of \_\_proto\_\_ brings us to a [MDN page](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/proto) with at least two scary-looking warnings about why we shouldn't be fiddling with \_\_proto\_\_, and that we would be better off using Object.getPrototypeOf() instead.
+A quick Google search of \_\_proto\_\_ brings us to a [MDN page](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/proto) with at least two scary-looking warnings about why we shouldn't be fiddling with \_\_proto\_\_, and that we would be better off using *Object.getPrototypeOf()* instead.
 
 ~~~
 b.__proto__ === Object.getPrototypeOf(b); //returns true;
@@ -58,7 +58,7 @@ with a \_\_proto\_\_ property that references the superclass' prototype.
 
 This is how a subclass is able to access the methods on its superclass' prototype!
 
-This is especially useful if you are trying to find the methods on a Javascript class using Object.getOwnPropertyNames().
+This is especially useful if you are trying to find the methods on a Javascript class using *Object.getOwnPropertyNames()*.
 
 ~~~~
 //forgot which methods are available on a HTMLBodyElement?
