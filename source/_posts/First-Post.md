@@ -12,7 +12,7 @@ Get a [Heroku account](https://id.heroku.com/login) and install the [Heroku tool
 <br>
 
 Step 3: 
-Create a new Heroku app
+Create a new Heroku app.
 ```
 $ heroku create blog //take note of the endpoint
 ```
