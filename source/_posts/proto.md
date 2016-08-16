@@ -4,7 +4,7 @@ date: 2016-08-16 13:59:52
 tags:
 ---
 
-Javascript uses prototype chains to implement prototypical inheritance, and most Javascript examples that implement (psuedo)classical inheritance assign a class' prototype using Object.create(Super.prototype). 
+Javascript uses prototype chains to implement prototypical inheritance, and most Javascript examples that implement (pseudo)classical inheritance assign a class' prototype using Object.create(Super.prototype). 
 
 If you run the following in the console:
 ~~~~
