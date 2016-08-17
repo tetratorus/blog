@@ -1,5 +1,5 @@
 ---
-title: How to set up a blog using Hexo in 30 mins
+title: How to set up a blog with Hexo in 30 mins
 date: 2016-08-09 20:11:07
 tags: 
 ---
@@ -14,7 +14,7 @@ Get a [Heroku account](https://id.heroku.com/login) and install the [Heroku tool
 Step 3: 
 Create a new Heroku app.
 ```
-$ heroku create blog //take note of the endpoint
+$ heroku create blog //take note of your repository URL
 ```
 <br>
 
