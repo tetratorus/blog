@@ -3,11 +3,11 @@ menu:
   Home: /
   Archives: /archives
   Github:
-    url: https://github.com/lentan1029
+    url: https://github.com/tetratorus
     icon: github
 
 # Title on top left of menu. Leave empty to use main blog title
-menu_title: 
+menu_title:
 
 # URL of the Home page image
 index_cover: http://i.imgur.com/YdYEoIE.jpg
@@ -32,10 +32,10 @@ google_analytics:
 addthis:
 
 # Social Accounts
-twitter_url: https://twitter.com/lentan1029
-twitter_handle: lentan1029
+twitter_url: https://twitter.com/tetratorus
+twitter_handle: tetratorus
 facebook_url: https://www.facebook.com/lentan1029
-github_url: https://github.com/lentan1029
-gitlab_url: 
+github_url: https://github.com/tetratorus
+gitlab_url:
 linkedin_url: https://sg.linkedin.com/in/lentan
-mailto: lentan1029@gmail.com
+mailto: tetratorus@gmail.com
