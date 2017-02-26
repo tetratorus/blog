@@ -1,6 +1,6 @@
 ---
 title: Cryptographic Primitives
-subtitle: the building blocks
+subtitle: the building blocks of cryptosystems
 tags: []
 readtime: 5 min read
 date: 2017-01-16 14:57:22
