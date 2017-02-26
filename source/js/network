@@ -1,0 +1,329 @@
+//Read the data from the mis element
+if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+  d3.select("article")
+     .insert("div","#mainContainer + *")
+     .text("Please use a desktop to display the visualization")
+     .attr("style", "font-style: italic; text-align: center;");
+} else {
+  var data = {
+    'Bitcoin': [['https://medium.com/@nik5ter/explain-bitcoin-like-im-five-73b4257ac833', 'https://bitcoin.org/en/faq#what-is-bitcoin'],['Double Spending Problem', 5], ['Bitcoin Wallets', 3], ['Blockchain', 3], ['Distributed Ledger', 5], ['Satoshi Nakamoto', 2]],
+    'Double Spending Problem': [['http://www.cryptocoinhome.com/bitcoin-double-spending-explained/'],['Bitcoin Mining', 5], ['Blockchain', 5]],
+    'Bitcoin Wallets': [['http://bitcoinsimplified.org/get-started/how-to-set-up-a-wallet/'],['Public-Key Authentication (PKA)', 5], ['Bitcoin Transactions', 4]],
+    'Bitcoin Mining': [['http://www.investopedia.com/articles/investing/043014/what-bitcoin-mining.asp'],['Bitcoin Mining Difficulty', 4], ['Bitcoin Mining Pools', 3], ['ASIC Mining Rigs', 3]],
+    'Blockchain': [['https://www.finextra.com/blogposting/12378/how-i-explained-blockchain-to-my-grandmother'],['Bitcoin Mining', 4]],
+    'Bitcoin Scaling': [['https://cointelegraph.com/news/the-human-impact-of-bitcoins-scaling-problems'],['Bitcoin Mining', 4]],
+    'The DAO': [['https://www.wired.com/2016/06/50-million-hack-just-showed-dao-human/'],['Ethereum', 5], ['Smart Contracts', 5]],
+    'Hashgraph': [['http://sammantics.com/blog/2016/7/27/hashgraph-consensus'],['Double Spending Problem', 5], ['Blockchain', 5]],
+    'Public-Key Authentication (PKA)': [['https://medium.com/@vrypan/explaining-public-key-cryptography-to-non-geeks-f0994b3c2d5#.3442tdalb'],['Trapdoor Function', 4], ['Encryption', 3]],
+    'Ethereum': [['https://www.quora.com/What-is-Ethereum-in-laymans-term'],['Smart Contracts', 5], ['Altcoin', 5]],
+    'Altcoin': [['https://www.cryptocoinsnews.com/altcoin/'],['Bitcoin', 5]],
+    'Smart Contracts': [['http://blockgeeks.com/guides/smart-contracts/'],['Bitcoin Mining', 5], ['Bitcoin', 5]],
+    'Trapdoor Function': [['https://www.youtube.com/watch?v=mxLfrZrXC-g']],
+    'Encryption': [['http://www.webopedia.com/TERM/E/encryption.html']],
+    'Bitcoin Mining Difficulty': [['https://www.weusecoins.com/en/mining-guide/#md']],
+    'Bitcoin Mining Pools': [['https://www.bitcoin.com/guides/what-is-a-bitcoin-mining-pool']],
+    'ASIC Mining Rigs': [['https://www.bitcoinmining.com/bitcoin-mining-hardware/']],
+    'Bitcoin Exchange': [['http://www.toptenreviews.com/money/investing/best-bitcoin-exchanges/'],['Bitcoin', 5]],
+    'Mt Gox': [['https://www.wired.com/2014/03/bitcoin-exchange/'],['Bitcoin', 5], ['Bitcoin Exchange', 2]],
+    'Bitcoin Transactions': [['http://www.coindesk.com/information/how-do-bitcoin-transactions-work/'],['Bitcoin Opcodes', 3]],
+    'Bitcoin Opcodes': [['http://davidederosa.com/basic-blockchain-programming/bitcoin-script-language-part-one/#opcodes']],
+    'Distributed Ledger': [['http://www.investopedia.com/news/what-distributed-ledger/'],['Merkle Directed Acyclic Graph (DAG)', 3], ['Bitcoin Transactions', 3]],
+    'Merkle Directed Acyclic Graph (DAG)': [['https://www.certificate-transparency.org/log-proofs-work'],],
+    'ZCash': [['https://z.cash/about.html?page=0'],['Bitcoin Transactions', 5], ['Altcoin', 5], ['Bitcoin Opcodes', 2]],
+    'Prediction Markets': [['https://www.augur.net/'],['Smart Contracts', 5], ['Oracles', 4]],
+    'Oracles': [['https://blog.oraclize.it/understanding-oracles-99055c9c9f7b#.4v6vvsw0b']],
+    'Satoshi Nakamoto': [['http://www.coindesk.com/information/who-is-satoshi-nakamoto/']],
+    'Lightning Network': [['http://bitcoin.stackexchange.com/questions/43700/how-does-the-lightning-network-work-in-simple-terms'],['Bitcoin', 5], ['Bitcoin Opcodes', 3], ['Bitcoin Scaling', 5], ['Segregated Witness (SegWit)', 4]],
+    'Segregated Witness (SegWit)': [['https://achow101.com/2016/04/Segwit-FUD-Clearup'],['Transaction Malleability', 4], ['Bitcoin Scaling', 4]],
+    'Transaction Malleability': [['http://www.coindesk.com/bitcoin-bug-guide-transaction-malleability/']],
+  }
+
+  var graph = {}
+
+  graph.nodes = []
+  for (var key in data) {
+    data[key].unshift(graph.nodes.length)
+    graph.nodes.push({
+      name: key,
+      links: data[key][1],
+      group: 1
+    })
+  }
+
+  graph.links = []
+  graph.nodes.forEach((node, index) => {
+    for (var i = 2; i < data[node.name].length; i++) {
+      graph.links.push({
+        source: index,
+        target: data[data[node.name][i][0]][0],
+        value: data[node.name][i][1]
+      })
+    }
+  })
+
+
+  //Constants for the SVG
+  var width = window.innerWidth,
+      height = window.innerWidth / 2;
+
+  //Set up the colour scale
+  var color = d3.scale.category20();
+
+  //Set up the force layout
+  var force = d3.layout.force()
+      .charge(-1000)
+      .linkDistance(function(d){
+        return 1/d.value * 60
+      })
+      .size([width, height]);
+
+  //Append a SVG to the body of the html page. Assign this SVG as an object to svg
+  // var svg = d3.select("body").append("svg")
+  //     .attr("width", width)
+  //     .attr("height", height);
+
+
+  var svg = d3.select("article")
+     .insert("div","#mainContainer + *")
+     .classed("svg-container", true) //container class to make it responsive
+     .append("svg")
+     //responsive SVG needs these 2 attributes and no width and height attr
+     .attr("preserveAspectRatio", "xMinYMin meet")
+     .attr("viewBox", "0 0 " + window.innerWidth.toString() + " " + (window.innerWidth / 2).toString())
+     //class to make it responsive
+     .classed("svg-content-responsive", true);
+
+  //Creates the graph data structure out of the json data
+  force.nodes(graph.nodes)
+      .links(graph.links)
+      .start();
+
+
+  //Add arrow markers
+  svg.append("defs").append("marker")
+    	.attr({
+    		"id":"arrow1",
+    		"viewBox":"0 -5 10 10",
+    		"refX": 20,
+    		"refY":0,
+    		"markerWidth":3,
+    		"markerHeight":3,
+    		"orient":"auto"
+    	})
+    	.append("path")
+    		.attr("d", "M0,-5L10,0L0,5")
+    		.attr("class","arrowHead");
+
+  svg.append("defs").append("marker")
+    	.attr({
+    		"id":"arrow2",
+    		"viewBox":"0 -5 10 10",
+    		"refX": 24,
+    		"refY":0,
+    		"markerWidth":3,
+    		"markerHeight":3,
+    		"orient":"auto"
+    	})
+    	.append("path")
+    		.attr("d", "M0,-5L10,0L0,5")
+    		.attr("class","arrowHead");
+
+  svg.append("defs").append("marker")
+    	.attr({
+    		"id":"arrow3",
+    		"viewBox":"0 -5 10 10",
+    		"refX": 21,
+    		"refY":0,
+    		"markerWidth":3,
+    		"markerHeight":3,
+    		"orient":"auto"
+    	})
+    	.append("path")
+    		.attr("d", "M0,-5L10,0L0,5")
+    		.attr("class","arrowHead");
+
+  svg.append("defs").append("marker")
+    	.attr({
+    		"id":"arrow4",
+    		"viewBox":"0 -5 10 10",
+    		"refX": 18,
+    		"refY":0,
+    		"markerWidth":3,
+    		"markerHeight":3,
+    		"orient":"auto"
+    	})
+    	.append("path")
+    		.attr("d", "M0,-5L10,0L0,5")
+    		.attr("class","arrowHead");
+
+  svg.append("defs").append("marker")
+    	.attr({
+    		"id":"arrow5",
+    		"viewBox":"0 -5 10 10",
+    		"refX": 15,
+    		"refY":0,
+    		"markerWidth":3,
+    		"markerHeight":3,
+    		"orient":"auto"
+    	})
+    	.append("path")
+    		.attr("d", "M0,-5L10,0L0,5")
+    		.attr("class","arrowHead");
+
+
+
+
+
+
+  //Toggle stores whether the highlighting is on
+  var toggle = 0;
+  //Create an array logging what is connected to what
+  var linkedByIndex = {};
+  for (i = 0; i < graph.nodes.length; i++) {
+      linkedByIndex[i + "," + i] = 1;
+  };
+  graph.links.forEach(function (d) {
+      linkedByIndex[d.source.index + "," + d.target.index] = 1;
+  });
+  //This function looks up whether a pair are neighbours
+  function neighboring(a, b) {
+      return linkedByIndex[a.index + "," + b.index];
+  }
+  function connectedNodes() {
+      if (toggle == 0) {
+          //Reduce the opacity of all but the neighbouring nodes
+          d = d3.select(this).node().__data__;
+          node.style("opacity", function (o) {
+              return neighboring(d, o) /* | neighboring(o, d) */? 1 : 0.1;
+          });
+          link.style("opacity", function (o) {
+              return d.index==o.source.index /*| d.index==o.target.index*/ ? 1 : 0.1;
+          });
+          //Reduce the op
+          toggle = 1;
+      } else {
+          //Put them back to opacity=1
+          node.style("opacity", 1);
+          link.style("opacity", 1);
+          toggle = 0;
+      }
+  }
+
+  //Set up tooltip
+
+  var tip = d3.tip()
+      .attr('class', 'd3-tip')
+      .offset([-10, 0])
+      .html(function (d) {
+        var link = function(url) {
+          return "<a target=\"_blank\" href=\""+url+"\">"+url+"</a><br>";
+        }
+        var linksHtmlArray = []
+        for (var i = 0; i < d.links.length; i++) {
+          linksHtmlArray.push(link(d.links[i]));
+        }
+        return  "<div id=\"tooltip\">" + linksHtmlArray.join('') + "</div>";
+      })
+  svg.call(tip);
+
+  //Create all the line svgs but without locations yet
+  var link = svg.selectAll(".link")
+  .data(graph.links)
+  .enter().append("line")
+  .attr("class", "link")
+  .style("stroke-width", function (d) {
+    return d.value;
+  }).style("marker-end",  function(d) { return "url(#arrow"+d.value+")" });
+
+
+  var node_drag = d3.behavior.drag()
+      .on("dragstart", dragstart)
+      .on("drag", dragmove)
+      .on("dragend", dragend);
+  function dragstart(d, i) {
+      d.fixed = true;
+      //force.stop() // stops the force auto positioning before you start dragging
+  }
+  function dragmove(d, i) {
+      d.px += d3.event.dx;
+      d.py += d3.event.dy;
+      d.x += d3.event.dx;
+      d.y += d3.event.dy;
+  }
+  function dragend(d, i) {
+      d.fixed = true; // of course set the node to fixed so the force doesn't include the node in its auto positioning stuff
+      force.resume();
+  }
+  function releasenode(d) {
+      d.fixed = false; // of course set the node to fixed so the force doesn't include the node in its auto positioning stuff
+      //force.resume();
+  }
+
+  //Do the same with the circles for the nodes - no
+  tip.showing = false;
+  tip.toggle = function() {
+    this.showing = !this.showing;
+    if (this.showing) {
+      this.show
+    } else {
+      this.show
+    }
+  }
+
+  var tipshowing = false;
+
+  var node = svg.selectAll(".node")
+      .data(graph.nodes)
+      .enter().append("g")
+      .attr("class", "node")
+      .call(node_drag)
+      .on('mouseover', connectedNodes)
+      .on('mouseout', connectedNodes)
+      .on('click', function() {
+        if (!tipshowing) {
+          tip.show.apply(this, arguments);
+          tipshowing = true;
+        } else {
+          tip.hide.apply(this, arguments);
+          tipshowing = false;
+        }
+      }.bind(this));
+
+  node.append("circle")
+      .attr("r", 8)
+      .style("fill", function (d) {
+      return color(d.group);
+  })
+  node.append("text")
+        .attr("dx", 10)
+        .attr("dy", ".35em")
+        .text(function(d) { return d.name })
+  //Now we are giving the SVGs co-ordinates - the force layout is generating the co-ordinates which this code is using to update the attributes of the SVG elements
+  force.on("tick", function () {
+      link.attr("x1", function (d) {
+          return d.source.x;
+      })
+          .attr("y1", function (d) {
+          return d.source.y;
+      })
+          .attr("x2", function (d) {
+          return d.target.x;
+      })
+          .attr("y2", function (d) {
+          return d.target.y;
+      });
+      d3.selectAll("circle").attr("cx", function (d) {
+          return d.x;
+      })
+          .attr("cy", function (d) {
+          return d.y;
+      });
+      d3.selectAll("text").attr("x", function (d) {
+          return d.x;
+      })
+          .attr("y", function (d) {
+          return d.y;
+      });
+  });
+
+}

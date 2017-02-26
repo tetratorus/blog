@@ -1,5 +1,7 @@
 ---
 title: {{ title }}
+subtitle: ''
 date: {{ date }}
-tags:
+tags: []
+readtime: 5 min read
 ---

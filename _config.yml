@@ -1,10 +1,10 @@
-title: Blog
-subtitle: a blog
-description: blog.
-author: lentan
-language: javascript
+title: subterranean conversations
+subtitle: truth lies beneath the noise
+author: tetratorus
+language: default
 timezone: null
-url: 'http://tetratorus.com'
+cover: '/img/logo_small.png'
+url: 'https://www.tetratorus.com'
 root: /
 permalink: ':year/:month/:day/:title/'
 permalink_defaults: null

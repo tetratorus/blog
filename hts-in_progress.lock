@@ -1,0 +1,7 @@
+Mirror in progress since Tue, 17 Jan 2017 23:40:45 .. please wait!
+httrack https://eprint.iacr.org/complete/ -r1 
+To pause the engine: create an empty file named 'hts-stop.lock'
+PID=24272
+UID=501
+GID=501
+START=1484667645

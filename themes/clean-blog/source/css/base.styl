@@ -1,6 +1,22 @@
 @import "variables.styl"
 @import "mixins.styl"
 
+#mainContent
+  text-align justify
+
+.addthis_inline_share_toolbox
+  text-align right
+
+.post-subheading
+  font-weight 300
+  font-family Helvetica Neue
+
+.post-readtime
+  font-style italic
+  font-weight normal
+  text-align right
+  font-family Palatino
+
 body
   @extend .serif
   font-size 20px
@@ -41,6 +57,15 @@ hr.small
   @extend .sans-serif
   .navbar-brand
     font-weight 800
+    letter-spacing 1px
+  .navbar-logo-text
+    display flex
+  .navbar-logo
+    margin-top -3px
+    margin-right -5px
+    background url("/img/logo_tiny.png")
+    width 23px
+    height 23px
   .nav
     li
       a
@@ -131,7 +156,7 @@ hr.small
       margin 10px 0 0
     @media only screen and (min-width: 768px)
       h1
-        font-size 80px
+        font-size 60px
   .post-heading
     h1
       font-size 35px

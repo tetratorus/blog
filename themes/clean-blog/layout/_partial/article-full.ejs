@@ -14,12 +14,19 @@
                         <%- item.subtitle %>
                     </h2>
                     <% } %>
+                    <% if (item.readtime && item.readtime.length) { %>
+                    <h4 class="post-readtime">
+                        <%- item.readtime %>
+                    </h4>
+                    <% } %>
                     <span class="meta">
                         <!-- Date and Author -->
                         <% if(item.author) { %>
                             Posted by <%- item.author %> on
                         <% } %>
+                        <% if(!item.no-date) { %>
                         <%= item.date.format(config.date_format) %>
+                        <% } %>
                     </span>
                 </div>
             </div>
@@ -29,7 +36,7 @@
 
 <!-- Post Content -->
 <article>
-    <div class="container">
+    <div class="container" id="mainContainer">
         <div class="row">
 
             <!-- Tags and categories -->
@@ -54,7 +61,7 @@
             <% } %>
 
             <!-- Post Main Content -->
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1" id="mainContent">
                 <%- item.content %>
 
                 <% if(theme.addthis) { %>
@@ -66,12 +73,21 @@
                 <% } %>
             </div>
 
-            <!-- Comments -->
-            <% if (item.comment != false) { %>
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <%- partial("_partial/comments.ejs") %>
-                </div>
+            <!-- Code -->
+            <% if (item.code && item.code.length){ %>
+              <%- item.code %>
             <% } %>
+            
         </div>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="addthis_inline_share_toolbox">
+            </div>
+            <% if (item.comment != false) { %>
+              <%- partial("_partial/comments.ejs") %>
+            <% } %>
+          </div>
     </div>
 </article>

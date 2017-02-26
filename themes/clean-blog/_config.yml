@@ -1,16 +1,16 @@
 # Header
 menu:
-  Home: /
-  Archives: /archives
+  About: /about
+  Author: /author
   Github:
     url: https://github.com/tetratorus
     icon: github
 
 # Title on top left of menu. Leave empty to use main blog title
-menu_title:
+menu_title: etratorus
 
 # URL of the Home page image
-index_cover: http://i.imgur.com/YdYEoIE.jpg
+index_cover: /img/bg.jpg
 
 # Default post title
 default_post_title: Untitled
@@ -18,7 +18,7 @@ default_post_title: Untitled
 # Comments. Choose one by filling up the information
 comments:
   # Disqus comments
-  disqus_shortname:
+  disqus_shortname: tetratorus
   # Facebook comments
   facebook:
     appid:
@@ -26,7 +26,7 @@ comments:
     comment_colorscheme: light
 
 # Google Analytics Tracking ID
-google_analytics:
+google_analytics: UA-89660763-1
 
 # Addthis ID
 addthis:
@@ -39,3 +39,29 @@ github_url: https://github.com/tetratorus
 gitlab_url:
 linkedin_url: https://sg.linkedin.com/in/lentan
 mailto: tetratorus@gmail.com
+
+# hexo-all-minifier
+html_minifier:
+  enable: true
+  exclude:
+
+css_minifier:
+  enable: true
+  exclude:
+    - '*.min.css'
+
+js_minifier:
+  enable: true
+  mangle: true
+  output:
+  compress:
+  exclude:
+    - '*.min.js'
+
+image_minifier:
+  enable: true
+  interlaced: false
+  multipass: false
+  optimizationLevel: 2
+  pngquant: false
+  progressive: false
