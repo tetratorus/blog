@@ -1,5 +1,5 @@
 title: subterranean conversations
-subtitle: truth lies beneath the noise
+subtitle: signals lie beneath the noise
 author: tetratorus
 language: default
 timezone: null
@@ -30,7 +30,7 @@ highlight:
   line_number: true
   auto_detect: false
   tab_replace: null
-default_category: uncategorized
+default_category: null
 category_map: null
 tag_map: null
 date_format: YYYY-MM-DD

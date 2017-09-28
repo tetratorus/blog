@@ -1,7 +1,7 @@
 ---
 title: Blockchain - An Overview
 subtitle: important ideas and developments in blockchain technology
-date: 2017-01-16 10:54:42
+date: 2017-02-16 10:54:42
 readtime: 20 min read
 tags: [cryptocurrency, bitcoin, blockchain, fintech, resource]
 ---

@@ -3,14 +3,14 @@ title: Cryptographic Primitives
 subtitle: the building blocks of cryptosystems
 tags: []
 readtime: 5 min read
-date: 2017-01-16 14:57:22
+date: 2017-03-16 14:57:22
 ---
 
 As every cryptographer knows: [don't roll your own security](http://security.stackexchange.com/questions/18197/why-shouldnt-we-roll-our-own).
 
 Many strategies and protocols have been tried and tested over the years, and in order to discourage people from reinventing the wheel, cryptographers usually reference well-known implementations/ideas that have been proven to work - these concepts are known as [cryptographic primitives](https://en.wikipedia.org/wiki/Cryptographic_primitive).
 
-Here are some common cryptographic primitives, with links to simplified explanations:
+Here are some common cryptographic primitives:
 [One-way hashing](https://www.youtube.com/watch?v=b4b8ktEV4Bg)
 [Symmetric key encryption](https://youtu.be/ERp8420ucGs?t=53s)
 [Public key cryptography](https://medium.com/@vrypan/explaining-public-key-cryptography-to-non-geeks-f0994b3c2d5#.gaz3mnes8)
