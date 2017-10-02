@@ -1,7 +1,6 @@
 # Header
 menu:
   About: /about
-  Author: /author
   Github:
     url: https://github.com/tetratorus
     icon: github
